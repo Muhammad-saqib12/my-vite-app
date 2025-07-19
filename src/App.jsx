@@ -11,8 +11,9 @@ import CreateProducts from "./Pages/CreateProducts";
 import ExpiredProducts from "./Pages/ExpiredProducts";
 import LowStocks from "./Pages/LowStocks";
 import SubCategory from "./Pages/SubCategory";
-import Login from "./Pages/Login";
+
 import { useState, useEffect } from "react";
+import Form from "./Pages/Form";
 
 function App() {
   const [user, setUser] = useState("");
@@ -34,7 +35,7 @@ function App() {
         </Routes>
       ) : (
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Form />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       )}
