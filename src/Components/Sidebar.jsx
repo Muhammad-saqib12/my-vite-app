@@ -14,7 +14,7 @@ import {
 // Navigation Items
 const navItems = [
   { label: "Create Products", icon: <PlusCircle size={26} />, to: "/createproducts" },
-  { label: "Expired Products", icon: <AlertTriangle size={26} />, to: "/expiredproducts" },
+
   { label: "low Stocks", icon: <TrendingDown size={26} />, to: "/lowstocks" },
   { label: "Category", icon: <LayoutGrid size={26} />, to: "/category" },
   { label: "Sub Category", icon: <Layers size={26} />, to: "/subcategory" },
