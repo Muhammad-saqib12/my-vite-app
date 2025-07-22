@@ -10,6 +10,7 @@ const columns = [
   "End Date"
 ];
 
+
 const rows = [
   { sku: "PT001", product: "Lenovo 3rd Generation", category: "Electronics", startdate: "19 Nov 2022", enddate: "02 Jan 2023" },
   { sku: "PT002", product: "Nike Jordan", category: "Shoes", startdate: "24 Nov 2022", enddate: "23 Jan 2023" },
@@ -27,6 +28,8 @@ export default function CreateProducts() {
     <Layout>
       <div>
         <Table
+        title="CreateProducts"
+        description="Manage Products"
           columns={columns}
           rows={rows}
         />

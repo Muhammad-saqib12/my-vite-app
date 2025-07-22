@@ -216,11 +216,15 @@ const rows = [
   },
 ];
 
+
 export default function Category() {
   return (
     <Layout>
       <div className="p-4">
-        <Table columns={columns} rows={rows} />
+        <Table
+          title="Category List"
+      description="Manage Category"
+       columns={columns} rows={rows} />
       </div>
     </Layout>
   );

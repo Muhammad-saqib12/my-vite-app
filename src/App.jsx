@@ -14,6 +14,7 @@ import SubCategory from "./Pages/SubCategory";
 
 import { useState, useEffect } from "react";
 import Form from "./Pages/Form";
+import Users from "./Pages/Users";
 
 function App() {
   const [user, setUser] = useState("");
@@ -32,6 +33,7 @@ function App() {
           <Route path="/expiredproducts" element={<ExpiredProducts />} />
           <Route path="/lowstocks" element={<LowStocks />} />
           <Route path="/subcategory" element={<SubCategory />} />
+          <Route path="/users" element={<Users/>}/>
         </Routes>
       ) : (
         <Routes>

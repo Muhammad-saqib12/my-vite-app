@@ -68,6 +68,8 @@ export default function SubCategory() {
     <Layout>
       <div>
         <Table
+        title="SubCategory"
+        description="Manage Category"
           columns={columns}
           rows={rows}
         />

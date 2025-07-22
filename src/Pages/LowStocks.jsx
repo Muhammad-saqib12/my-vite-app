@@ -111,7 +111,9 @@ export default function LowStocks() {
   return (
     <Layout>
       <div>
-        <Table columns={columns}
+        <Table
+        title="Low Stocks"
+        description="Manage Stocks" columns={columns}
          rows={rows} />
       </div>
     </Layout>

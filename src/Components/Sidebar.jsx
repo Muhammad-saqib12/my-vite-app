@@ -8,6 +8,7 @@ import {
   Layers,
   LogOut,
   LogOutIcon,
+  LogIn,
 } from "lucide-react";
 
 // Navigation Items
@@ -17,6 +18,7 @@ const navItems = [
   { label: "low Stocks", icon: <TrendingDown size={26} />, to: "/lowstocks" },
   { label: "Category", icon: <LayoutGrid size={26} />, to: "/category" },
   { label: "Sub Category", icon: <Layers size={26} />, to: "/subcategory" },
+   { label: "Users", icon: <LogIn size={26} />, to: "/users" },
 
 ];
 
