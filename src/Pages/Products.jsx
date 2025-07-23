@@ -6,88 +6,23 @@ const columns = [
   "SKU",
   "Product",
   "Category",
-  "Brand",
-  "Price",
-  "Unit",
-  "Qty",
-  "Created",
+  "Start Date",
+  "End Date",
 ];
 
-// ✅ Initial 7 products
 const initialRows = [
-  {
-    sku: "PT001",
-    product: "Lenovo 3rd Generation",
-    category: "Laptop",
-    brand: "Lenovo",
-    price: 12500,
-    unit: "Pc",
-    qty: 100,
-    created: "Arroon",
-  },
-  {
-    sku: "PT002",
-    product: "Bold V3.2",
-    category: "Electronics",
-    brand: "Bolt",
-    price: 1600,
-    unit: "Pc",
-    qty: 140,
-    created: "Kenneth",
-  },
-  {
-    sku: "PT003",
-    product: "iPhone 14 Pro",
-    category: "Mobile",
-    brand: "Apple",
-    price: 280000,
-    unit: "Pc",
-    qty: 45,
-    created: "System",
-  },
-  {
-    sku: "PT004",
-    product: "Dell XPS 13",
-    category: "Laptop",
-    brand: "Dell",
-    price: 150000,
-    unit: "Pc",
-    qty: 30,
-    created: "Admin",
-  },
-  {
-    sku: "PT005",
-    product: "Samsung Smart TV 55\"",
-    category: "Electronics",
-    brand: "Samsung",
-    price: 90000,
-    unit: "Pc",
-    qty: 25,
-    created: "Arroon",
-  },
-  {
-    sku: "PT006",
-    product: "Canon EOS 200D",
-    category: "Camera",
-    brand: "Canon",
-    price: 95000,
-    unit: "Pc",
-    qty: 20,
-    created: "Kenneth",
-  },
-  {
-    sku: "PT007",
-    product: "Realme 11X",
-    category: "Mobile",
-    brand: "Realme",
-    price: 43000,
-    unit: "Pc",
-    qty: 75,
-    created: "System",
-  },
+  { sku: "PT001", product: "Lenovo 3rd Generation", category: "Electronics", startdate: "19 Nov 2022", enddate: "02 Jan 2023" },
+  { sku: "PT002", product: "Nike Jordan", category: "Shoes", startdate: "24 Nov 2022", enddate: "23 Jan 2023" },
+  { sku: "PT003", product: "Apple Series 5 Watch", category: "Wearables", startdate: "11 Dec 2022", enddate: "18 Feb 2023" },
+  { sku: "PT004", product: "Amazon Echo Dot", category: "Smart Home", startdate: "27 Dec 2022", enddate: "24 Feb 2023" },
+  { sku: "PT005", product: "Lobar Handy", category: "Tools", startdate: "08 Jan 2023", enddate: "16 Mar 2023" },
+  { sku: "PT006", product: "Red Premium Handy", category: "Tools", startdate: "17 Jan 2023", enddate: "29 Mar 2023" },
+  { sku: "PT007", product: "Red Premium Handy", category: "Tools", startdate: "22 Feb 2023", enddate: "04 Apr 2023" },
+  { sku: "PT008", product: "Black Slim 200", category: "Electronics", startdate: "18 Mar 2023", enddate: "13 May 2023" },
+  { sku: "PT009", product: "Woodcraft Sandal", category: "Shoes", startdate: "29 Mar 2023", enddate: "27 May 2023" },
 ];
 
-export default function Category() {
+export default function Products() {
   const [rows, setRows] = useState(initialRows);
   const [showModal, setShowModal] = useState(false);
 
@@ -95,11 +30,8 @@ export default function Category() {
     sku: "",
     product: "",
     category: "",
-    brand: "",
-    price: "",
-    unit: "",
-    qty: "",
-    created: "",
+    startdate: "",
+    enddate: "",
   });
 
   const handleChange = (e) => {
@@ -113,38 +45,35 @@ export default function Category() {
       sku: "",
       product: "",
       category: "",
-      brand: "",
-      price: "",
-      unit: "",
-      qty: "",
-      created: "",
+      startdate: "",
+      enddate: "",
     });
     setShowModal(false);
   };
 
   return (
     <Layout>
-      <div className="relative">
+      <div>
         <Table
-          title="Category List"
-          description="Manage Category"
+          title="Products"
+          description="Manage Products"
           columns={columns}
           rows={rows}
-          button="Add new Product"
+          button="Add new product"
           onButtonClick={() => setShowModal(true)}
         />
 
-        {/* 🔽 Modal for Adding Product */}
+        {/* 🔽 Add Product Modal */}
         {showModal && (
           <div className="fixed inset-0 bg-amber-100 bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-md">
               <h2 className="text-xl font-semibold mb-4">Add New Product</h2>
               <form onSubmit={handleSubmit} className="space-y-3">
-                {["sku", "product", "category", "brand", "price", "unit", "qty", "created"].map((field) => (
+                {["sku", "product", "category", "startdate", "enddate"].map((field) => (
                   <input
                     key={field}
                     name={field}
-                    type={field === "price" || field === "qty" ? "number" : "text"}
+                    type="text"
                     placeholder={field[0].toUpperCase() + field.slice(1)}
                     value={newProduct[field]}
                     onChange={handleChange}

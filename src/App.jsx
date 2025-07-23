@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
 import Category from "./Pages/Category";
-import CreateProducts from "./Pages/CreateProducts";
+
 
 import LowStocks from "./Pages/LowStocks";
 import SubCategory from "./Pages/SubCategory";
@@ -15,6 +15,7 @@ import SubCategory from "./Pages/SubCategory";
 import { useState, useEffect } from "react";
 import Form from "./Pages/Form";
 import Users from "./Pages/Users";
+import Products from "./Pages/Products";
 
 function App() {
   const [user, setUser] = useState("");
@@ -29,7 +30,7 @@ function App() {
       {user ? (
         <Routes>
           <Route path="/" element={<Category />} />
-          <Route path="/createproducts" element={<CreateProducts />} />
+          <Route path="/products" element={<Products />} />
           
           <Route path="/lowstocks" element={<LowStocks />} />
           <Route path="/subcategory" element={<SubCategory />} />

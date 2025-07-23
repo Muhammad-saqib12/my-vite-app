@@ -1,21 +1,20 @@
+import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 
 export default function Layout({ children }) {
-   const handleLogout = () => {
-    localStorage.removeItem("user");
-    window.location.reload();
-  };
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
   return (
     <div className="h-screen w-screen fixed">
-      <Navbar />
-      
+      {/* Pass isSidebarOpen and toggle function to Navbar */}
+      <Navbar isSidebarOpen={isSidebarOpen} toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
+
       <div className="flex flex-row">
-        <Sidebar />
-        {/* ✅ render the *value*, not the whole props object */}
-        <div className="border w-full overflow-y-scroll">
-          {children}
-        </div>
+        {/* Conditionally render Sidebar */}
+        {isSidebarOpen && <Sidebar />}
+        
+        <div className="w-full overflow-y-scroll">{children}</div>
       </div>
     </div>
   );

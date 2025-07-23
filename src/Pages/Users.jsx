@@ -1,202 +1,167 @@
 import React, { useState } from "react";
-import { UserPlus, Search, Lock, User } from "lucide-react";
+import Layout from "../Components/Layout";
+import Table from "../Components/Table";
+
+// 👇 Table Columns
+const columns = [
+  "Name",
+  "Username",
+  "Email",
+  "Password",
+  "Role",
+  "Status",
+  "Created",
+  "AT",
+];
+
+// 👇 Initial Data
+const initialRows = [
+  {
+    name: "Arroon Smith",
+    username: "arroon123",
+    email: "arroon@example.com",
+    password: "pass1234",
+    role: "Admin",
+    status: "Active",
+    created: "System",
+    at: "2024-01-15",
+  },
+  {
+    name: "Kenneth James",
+    username: "kennethj",
+    email: "kenneth@example.com",
+    password: "secure123",
+    role: "Editor",
+    status: "Active",
+    created: "Admin",
+    at: "2024-02-01",
+  },
+  {
+    name: "Sarah Lopez",
+    username: "slopez",
+    email: "sarah@example.com",
+    password: "sarah2024",
+    role: "User",
+    status: "Inactive",
+    created: "Admin",
+    at: "2024-03-10",
+  },
+  {
+    name: "David Miller",
+    username: "davidm",
+    email: "david@example.com",
+    password: "david321",
+    role: "Editor",
+    status: "Active",
+    created: "System",
+    at: "2024-04-05",
+  },
+  {
+    name: "Emily Carter",
+    username: "emilyc",
+    email: "emily@example.com",
+    password: "emcpass",
+    role: "Admin",
+    status: "Pending",
+    created: "Admin",
+    at: "2024-05-20",
+  },
+  {
+    name: "Michael Scott",
+    username: "mscott",
+    email: "michael@example.com",
+    password: "dundermifflin",
+    role: "Manager",
+    status: "Active",
+    created: "HR",
+    at: "2024-06-12",
+  },
+];
+
 
 export default function Users() {
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      name: "Usama Khan",
-      username: "usamak",
-      email: "usama@example.com",
-      phone: "03001234567",
-      role: "Admin",
-      address: "Karachi, Pakistan",
-      createdBy: "System",
-      createdDate: "2023-01-01",
-      updatedBy: "Usama",
-      updatedDate: "2024-05-05",
-    },
-  ]);
+  const [rows, setRows] = useState(initialRows);
+  const [showModal, setShowModal] = useState(false);
+  const [newUser, setNewUser] = useState({
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+    role: "",
+    status: "",
+    created: "",
+    at: "",
+  });
 
-  const handleAddUser = () => {
-    const name = prompt("Enter name:");
-    const username = prompt("Enter username:");
-    const email = prompt("Enter email:");
-    const phone = prompt("Enter phone:");
-    const role = prompt("Enter role:");
-    const address = prompt("Enter address:");
-
-    if (name && username && email) {
-      const newUser = {
-        id: users.length + 1,
-        name,
-        username,
-        email,
-        phone,
-        role,
-        address,
-        createdBy: "Admin",
-        createdDate: new Date().toISOString().slice(0, 10),
-        updatedBy: "Admin",
-        updatedDate: new Date().toISOString().slice(0, 10),
-      };
-      setUsers([...users, newUser]);
-    }
+  const handleChange = (e) => {
+    setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
 
-  const handleFieldChange = (e, id, field) => {
-    const updated = users.map((user) =>
-      user.id === id ? { ...user, [field]: e.target.value } : user
-    );
-    setUsers(updated);
-  };
-
-  const handleChangePassword = (username) => {
-    const newPassword = prompt(`Enter new password for ${username}:`);
-    if (newPassword) {
-      alert(`Password updated for ${username}.`);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setRows([...rows, newUser]);
+    setNewUser({
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+      role: "",
+      status: "",
+      created: "",
+      at: "",
+    });
+    setShowModal(false);
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      {/* Top Bar */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <User className="w-7 h-7 text-blue-600" />
-          <h1 className="text-2xl font-bold text-gray-800">Users</h1>
-        </div>
+    <Layout>
+      <div className="relative">
+        <Table
+          title="Users List"
+          columns={columns}
+          rows={rows}
+          button="Add new User"
+          onButtonClick={() => setShowModal(true)} // 👈 button click handler
+        />
 
-        <div className="flex items-center gap-3">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search users..."
-              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div>
-
-          <button
-            onClick={handleAddUser}
-            className="bg-blue-600 text-white px-5 py-2.5 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition"
-          >
-            <UserPlus className="w-5 h-5" />
-            Add User
-          </button>
-        </div>
-      </div>
-
-      {/* Users Table */}
-      <div className="overflow-x-auto bg-white rounded-xl shadow">
-        <table className="min-w-full table-auto border border-gray-200">
-          <thead className="bg-gray-200 text-gray-700 text-sm">
-            <tr>
-              <th className="px-4 py-3 border">#</th>
-              <th className="px-4 py-3 border">Actions</th>
-              <th className="px-4 py-3 border">Name</th>
-              <th className="px-4 py-3 border">Username</th>
-              <th className="px-4 py-3 border">Email</th>
-              <th className="px-4 py-3 border">Phone</th>
-              <th className="px-4 py-3 border">Role</th>
-              <th className="px-4 py-3 border">Address</th>
-              <th className="px-4 py-3 border">Created By</th>
-              <th className="px-4 py-3 border">Created Date</th>
-              <th className="px-4 py-3 border">Updated By</th>
-              <th className="px-4 py-3 border">Updated Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user, idx) => (
-              <tr key={user.id} className="text-sm text-gray-800">
-                <td className="px-4 py-3 border text-center">{idx + 1}</td>
-                <td className="px-4 py-3 border text-center">
+        {/* 🔽 Modal */}
+        {showModal && (
+          <div className="fixed inset-0 bg-amber-100 bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-md">
+              <h2 className="text-xl font-semibold mb-4">Add New User</h2>
+              <form onSubmit={handleSubmit} className="space-y-3">
+                {["name", "username", "email", "password", "role", "status", "created", "at"].map((field) => (
+                  <input
+                    key={field}
+                    name={field}
+                    type="text"
+                    placeholder={field[0].toUpperCase() + field.slice(1)}
+                    value={newUser[field]}
+                    onChange={handleChange}
+                    required
+                    className="w-full border rounded-lg px-3 py-2"
+                  />
+                ))}
+                <div className="flex justify-end gap-2">
                   <button
-                    className="text-blue-600 hover:text-blue-800 flex items-center gap-1"
-                    onClick={() => handleChangePassword(user.username)}
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                    className="bg-gray-300 text-black px-4 py-2 rounded-lg"
                   >
-                    <Lock className="w-4 h-4" />
-                    Change
+                    Cancel
                   </button>
-                </td>
-                <td className="px-4 py-3 border">
-                  <input
-                    type="text"
-                    value={user.name}
-                    onChange={(e) => handleFieldChange(e, user.id, "name")}
-                    className="w-full border rounded px-1"
-                  />
-                </td>
-                <td className="px-4 py-3 border">
-                  <input
-                    type="text"
-                    value={user.username}
-                    onChange={(e) => handleFieldChange(e, user.id, "username")}
-                    className="w-full border rounded px-1"
-                  />
-                </td>
-                <td className="px-4 py-3 border">
-                  <input
-                    type="email"
-                    value={user.email}
-                    onChange={(e) => handleFieldChange(e, user.id, "email")}
-                    className="w-full border rounded px-1"
-                  />
-                </td>
-                <td className="px-4 py-3 border">
-                  <input
-                    type="text"
-                    value={user.phone}
-                    onChange={(e) => handleFieldChange(e, user.id, "phone")}
-                    className="w-full border rounded px-1"
-                  />
-                </td>
-                <td className="px-4 py-3 border">
-                  <input
-                    type="text"
-                    value={user.role}
-                    onChange={(e) => handleFieldChange(e, user.id, "role")}
-                    className="w-full border rounded px-1"
-                  />
-                </td>
-                <td className="px-4 py-3 border">
-                  <input
-                    type="text"
-                    value={user.address}
-                    onChange={(e) => handleFieldChange(e, user.id, "address")}
-                    className="w-full border rounded px-1"
-                  />
-                </td>
-                <td className="px-4 py-3 border">
-                  <input
-                    type="text"
-                    value={user.createdBy}
-                    onChange={(e) => handleFieldChange(e, user.id, "createdBy")}
-                    className="w-full border rounded px-1"
-                  />
-                </td>
-                <td className="px-4 py-3 border">{user.createdDate}</td>
-                <td className="px-4 py-3 border">
-                  <input
-                    type="text"
-                    value={user.updatedBy}
-                    onChange={(e) => handleFieldChange(e, user.id, "updatedBy")}
-                    className="w-full border rounded px-1"
-                  />
-                </td>
-                <td className="px-4 py-3 border">
-                  <input
-                    type="date"
-                    value={user.updatedDate}
-                    onChange={(e) => handleFieldChange(e, user.id, "updatedDate")}
-                    className="w-full border border-gray-300 px-2 py-1 rounded"
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  <button
+                    type="submit"
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+                  >
+                    Add User
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
+    </Layout>
   );
 }

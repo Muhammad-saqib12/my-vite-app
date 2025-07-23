@@ -13,11 +13,11 @@ import {
 
 // Navigation Items
 const navItems = [
-  { label: "Create Products", icon: <PlusCircle size={26} />, to: "/createproducts" },
+  { label: "Products", icon: <PlusCircle size={26} />, to: "/products" },
 
-  { label: "low Stocks", icon: <TrendingDown size={26} />, to: "/lowstocks" },
+  
   { label: "Category", icon: <LayoutGrid size={26} />, to: "/category" },
-  { label: "Sub Category", icon: <Layers size={26} />, to: "/subcategory" },
+ 
    { label: "Users", icon: <LogIn size={26} />, to: "/users" },
 
 ];
@@ -31,9 +31,9 @@ export default function Sidebar() {
   return (
     <div className="w-80 min-h-screen bg-white text-gray-800 px-8 py-8 shadow-lg border-r border-gray-200">
       {/* Top Heading */}
-      <h2 className="text-3xl font-bold text-gray-900 mb-8 border-b border-gray-300 pb-4">
+      {/* <h2 className="text-3xl font-bold text-gray-900 mb-8 border-b border-gray-300 pb-4">
         Inventory
-      </h2>
+      </h2> */}
 
       {/* Navigation Links */}
       <nav className="space-y-4">
@@ -48,9 +48,10 @@ export default function Sidebar() {
           </Link>
         ))}
       </nav>
-      <div className="flex items-center gap-4 text-gray-700 hover:bg-gray-100 px-5 py-3 rounded-lg transition-all duration-200 text-lg font-semibold">
-        <LogOutIcon className="text-blue-600" size={26}/>
-        <button className="text-blue-600" onClick={handleLogout}>Logout</button>
+      <div className="flex py-120 items-center gap-4 text-gray-700 hover: px-5  rounded-lg transition-all duration-200 text-lg font-semibold">
+      
+        {/* <LogOutIcon className="text-red-600" size={26}/> */}
+        <button className="text-white bg-red-500 w-[150px] h-[50px] rounded-xl " onClick={handleLogout}>Logout</button>
       </div>
       
     </div>
